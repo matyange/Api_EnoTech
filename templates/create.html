@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<form action="/addWine" method="post" enctype="multipart/form-data">
+<div>
+    <label for="winery">Vino</label>
+    <input type="text" id="winery" name="winery">
+</div>
+<div>
+    <label for="wine">Cosecha</label>
+    <input type="text" id="wine" name="wine">
+</div>
+<div>
+    <label for="pais">Pais</label>
+    <select name="location" id="pais" >
+        {%for item in locations%}
+        <option value="{{item[0]}}">{{item[1]}}</option>
+        {% endfor %}
+    </select>
+</div>
+<div>
+    <label for="foto">Foto</label>
+    <input type="file" id="foto" name="image">
+</div>
+<div>
+    <input type="submit" value="Crear">
+</div>
+
+</form>
+</body>
+
+</html>

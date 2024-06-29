@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src\css\Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="shortcut icon" href="/img/favicon-32x32.png" type="image/x-icon">
+    <title>EnoTech Solutions</title>
+</head>
+<!-- //////////////////////////////////////////////////////////// -->
+
+
+<body>
+    <!--El body esta estructurado con el header, el main y el footer -->
+    <header class="header">
+
+        <a href="index.html">
+            <img src="../src/img/Logo_enotech_H.png" alt="EnoTech Solutions Logo" class="logo" id="logo_default">
+            <img src="img/Logo_enotech.png" alt="EnoTech Solutions Logo" class="logo" id="logo_movil">
+
+        <nav class="nav"> <!--Esta es la barra de navegacion que te mantiene en todas paginas -->
+            <ul>
+                <li class="enlace"><a href="index">Inicio</a></li>
+                <li class="enlace"><a href="nosotros">Nosotros</a></li>
+                <li class="enlace"><a href="productos">Productos</a></li>
+                <li class="enlace"><a href="contacto">Contacto</a></li>
+                <li class="enlace"><a href="getAll">Login</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <main class="main">
+
+        <section class="master">
+            <h1 class="animate__animated animate__fadeInDown">Contacto</h1>
+            <p class="animate__animated animate__fadeInDown"><i>"Es hora de optimizar su producción"</i></p>
+        </section>
+
+        <section class="content">
+
+
+            <div class="contenedor">
+                <form id="formulario" method="get">
+                    <div class="form-group">
+                        <label for="Nombre">* Nombre:</label>
+                        <input type="text" id="Nombre" name="Nombre" placeholder="Ingrese su nombre" class="form-control">
+                    </div>
+                    <br>
+
+
+                    <div class="form-group">
+                        <label for="Apellido">* Apellido:</label>
+                        <input type="text" id="Apellido" name="Apellido" placeholder="Ingrese su Apellido" class="form-control">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="empresa">* Empresa o institucion:</label>
+                        <input type="text" id="empresa" name="empresa"
+                            placeholder="Empresa o institucion a la que pertenece" class="form-control">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="DNI">* DNI:</label>
+                        <input type="number" id="DNI" name="DNI" placeholder="Ingrese su DNI" class="form-control">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="Area">* Seleccione el area que desea contactar</label>
+                        <select name="Area" id="Area" class="form-control">
+                            <option value="Ventas" id="Ventas">Ventas</option>
+                            <option value="Soporte" id="Soporte">Soporte tecnico</option>
+                            <option value="laboratorio" id="laboratorio">laboratorio</option>
+                            <option value="Suministros" id="Suministros">Suministros</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="telefono">* Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su telefono" class="form-control">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="email">* email:</label>
+                        <input type="email" id="email" name="email" placeholder="Ingrese su email" class="form-control">
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="suscripcion" name="suscripcion"  class="form-check-input">
+                        <label for="suscripcion" class="form-check-label">Deseo recibir notificaciones en mi correo</label>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="condiciones" name="condiciones" class="form-check-input">
+                        <label for="condiciones" class="form-check-label">* Acepto las condiciones</label>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="mensaje">* <b>Mensaje</b></label><br>
+
+                        <textarea name="mensaje" id="mensaje" placeholder="Escriba su mensaje..." rows="10"
+                            cols="50"  class="form-control"></textarea>
+                    </div>
+                    <br>
+
+                    <input type="submit" id="submit" name="submit"class="btn btn-primary">
+                    <br>
+
+
+
+                </form>
+
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 EnoTech Solutions. Todos los derechos reservados.</p>
+    </footer>
+
+
+
+
+    <script src="Script.js"></script>
+
+
+
+</body>
+
+</html>

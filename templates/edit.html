@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/update" method="post" enctype="multipart/form-data">
+        {%for item in datos%}
+        <div>
+            <input type="text" value=" {{item[0]}}" name="id" hidden>
+        </div>
+        <div>
+            <label for="winery">Vino</label>
+            <input type="text" id="winery" name="winery" value="{{item[1]}}">
+        </div>
+        <div>
+            <label for="wine">Cosecha</label>
+            <input type="text" id="wine" name="wine" value="{{item[2]}}">
+        </div>
+        <div>
+            <label for="pais">Pais</label>
+            <select name="location" id="pais">
+                <option value="default">{{item[3]}}</option>
+                {%for item in locations%}
+                <option value="{{item[0]}}">{{item[1]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <h3>EN ESTE LUGAR VA A ESTAR ALOJADO LA IMAGEN QUE ESTARA GUARDADA EN LA BASE DE DATOS</h3>
+            <label for="foto">Foto</label>
+            <input type="file" id="foto" name="image">
+        </div>
+        <div>
+            <input type="submit" value="Realizar cambios">
+        </div>
+        {% endfor %}
+    </form>
+</body>
+
+</html>

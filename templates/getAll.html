@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<button><a href="/create">Crear</a></button>
+<table>
+    <thead>
+        <tr>
+            <th>Vino</th>
+            <th>Cosecha</th>
+            <th>Pais de Cosecha</th>
+            <th>Imagen</th>
+            <th>opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for item in wines%}
+        <tr>
+            <td>{{item[1]}}</td>
+            <td>{{item[2]}}</td>
+            <td>{{item[3]}}</td>
+            <td>{{item[4]}}</td>
+            <td>
+                <a href="/edit/{{item[0]}}">Editar</a>
+                <a href="/delete/{{item[0]}}" onclick="alert('¿Estas seguro de Eliminar esta fila?')">Borrar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+
+</html>
