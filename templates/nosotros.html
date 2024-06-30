@@ -4,26 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src\css\Style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="shortcut icon" href="/img/favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon-32x32.png') }}" type="image/x-icon">
     <title>EnoTech Solutions</title>
 </head>
 
 <body>
     <!--El body esta estructurado con el header, el main y el footer -->
     <header class="header">
-        <a href="index.html">
-            <img src="img/Logo_enotech_H.png" alt="EnoTech Solutions Logo" class="logo" id="logo_default">
-            <img src="img/Logo_enotech.png" alt="EnoTech Solutions Logo" class="logo" id="logo_movil">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/Logo_enotech_H.png') }}" alt="EnoTech Solutions Logo" class="logo" id="logo_default">
+            <img src="{{ url_for('static', filename='img/Logo_enotech.png') }}" alt="EnoTech Solutions Logo" class="logo" id="logo_movil">
         </a>
         <nav class="nav"> <!--Esta es la barra de navegacion que te mantiene en todas paginas -->
             <ul>
-                <li class="enlace"><a href="index">Inicio</a></li>
-                <li class="enlace"><a href="nosotros">Nosotros</a></li>
-                <li class="enlace"><a href="productos">Productos</a></li>
-                <li class="enlace"><a href="contacto">Contacto</a></li>
-                <li class="enlace"><a href="getAll">Login</a></li>
+                <li class="enlace"><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li class="enlace"><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li class="enlace"><a href="{{ url_for('productos') }}">Productos</a></li>
+                <li class="enlace"><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                <li class="enlace"><a href="{{ url_for('getAll') }}">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -36,13 +36,13 @@
 
         <section class="content">
 
-            <H2>NOSOTROS</H2>
+            <h2>NOSOTROS</h2>
             <div class="cont-nosotros">
 
                 <div class="art-nos">
 
                     <div>
-                        <img src="img/Viñedos_cordillera.jpg" alt="">
+                        <img src="{{ url_for('static', filename='img/Viñedos_cordillera.jpg') }}" alt="">
                         <h3>Historia de EnoTech Solutions</h3>
                         <p>EnoTech Solutions, fundada en 2012 en Luján de Cuyo, Mendoza, se dedica a revolucionar la
                             industria vitivinícola con tecnologías avanzadas para optimizar la producción de vino.
@@ -56,7 +56,7 @@
                 <div class="art-nos">
 
                     <div>
-                        <img src="/img/enologo_pasillos_piletas.jpg" alt="">
+                        <img src="{{ url_for('static', filename='img/enologo_pasillos_piletas.jpg') }}" alt="">
                         <h3>Experiencia del Equipo de EnoTech Solutions</h3>
                         <p>EnoTech Solutions cuenta con un equipo de expertos en vitivinicultura y tecnología. Nuestros
                             ingenieros de procesos optimizan sistemas de control en bodegas, nuestro equipo de gestión
@@ -68,31 +68,30 @@
             </div>
 
             <div id="catalogo">
-                <h2>Bodegas y lineas de vinos que controlamos</h2>
+                <h2>Bodegas y líneas de vinos que controlamos</h2>
             </div>
             <div>
-                <button><a href="/create">Crear</a></button>
+                <button><a href="{{ url_for('create') }}">Crear</a></button>
                 <table>
                     <thead>
                         <tr>
                             <th>Vino</th>
                             <th>Cosecha</th>
-                            <th>Pais de Cosecha</th>
+                            <th>País de Cosecha</th>
                             <th>Imagen</th>
-                            <th>opciones</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {%for item in wines%}
+                        {% for item in wines %}
                         <tr>
-                            <td>{{item[1]}}</td>
-                            <td>{{item[2]}}</td>
-                            <td>{{item[3]}}</td>
-                            <td>{{item[4]}}</td>
+                            <td>{{ item[1] }}</td>
+                            <td>{{ item[2] }}</td>
+                            <td>{{ item[3] }}</td>
+                            <td><img src="{{ url_for('static', filename='img/' ~ item[4]) }}" alt="Imagen de {{ item[1] }}"></td>
                             <td>
-                                <a href="/edit/{{item[0]}}">Editar</a>
-                                <a href="/delete/{{item[0]}}"
-                                    onclick="alert('¿Estas seguro de Eliminar esta fila?')">Borrar</a>
+                                <a href="{{ url_for('edit', id=item[0]) }}">Editar</a>
+                                <a href="{{ url_for('delete', id=item[0]) }}" onclick="return confirm('¿Estás seguro de eliminar esta fila?')">Borrar</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -102,17 +101,11 @@
         </section>
     </main>
 
-
-    <footer class="footer"> <!--El footer tambien se mantien en todas las paginas del sitio -->
+    <footer class="footer"> <!--El footer también se mantiene en todas las páginas del sitio -->
         <p>&copy; 2024 EnoTech Solutions. Todos los derechos reservados.</p>
     </footer>
 
-
-
-
-    <script src="Script.js"></script> <!--Este es el enlace al script de javascript, se coloca al final del body-->
-
-
+    <script src="{{ url_for('static', filename='scripts/Script.js') }}"></script> <!--Este es el enlace al script de javascript, se coloca al final del body-->
 </body>
 
 </html>
