@@ -1,4 +1,4 @@
-from flask import render_template, redirect,request
+from flask import render_template, redirect, request, url_for
 from flask import Flask
 from flaskext.mysql import MySQL
 
@@ -10,7 +10,7 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_HOST']='localhost'
 app.config['MYSQL_DATABASE_USER']='root'
 app.config['MYSQL_DATABASE_PASSWORD']=''
-app.config['MYSQL_DATABASE_BD']='api_enotech'
+app.config['MYSQL_DATABASE_DB']='api_enotech'
 
 mysql.init_app(app)
 
@@ -67,13 +67,13 @@ def addWine():
     _wine = request.form["wine"]
     _location = request.form["location"]
     # _image = request.form["image"]
-    _image = "null"
+    _image = request.files["txtFoto"]
     datos = (_winery,_wine,_location,_image)
 
     sql = "insert into `Api_Enotech`.`wines` (`winery`,`wine`,`id_Location`,`image`) values (%s,%s,%s,%s)" 
     callBD(sql,datos)
 
-    return redirect('/getAll')
+    return redirect(url_for('getAll'))
 
 @app.route('/edit/<int:id>')
 def edit(id):

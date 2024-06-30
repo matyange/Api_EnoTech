@@ -4,110 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../src/css/Style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="shortcut icon" href="../src/img/favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon-32x32.png') }}" type="image/x-icon">
     <title>EnoTech Solutions</title>
 </head>
-<!-- ///////////////////////////// BODY /////////////////////////////// -->
-
 
 <body>
     <!--El body esta estructurado con el header, el main y el footer -->
     <header class="header">
-        <a href="index.html">
-            <img src="../src/img/Logo_enotech_H.png" alt="EnoTech Solutions Logo" class="logo" id="logo_default">
-            <img src="../src/img/Logo_enotech.png" alt="EnoTech Solutions Logo" class="logo" id="logo_movil">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='img/Logo_enotech_H.png') }}" alt="EnoTech Solutions Logo" class="logo" id="logo_default">
+            <img src="{{ url_for('static', filename='img/Logo_enotech.png') }}" alt="EnoTech Solutions Logo" class="logo" id="logo_movil">
         </a>
 
         <nav class="nav"> <!--Esta es la barra de navegacion que te mantiene en todas paginas -->
             <ul>
-                <li class="enlace"><a href="index.html">Inicio</a></li>
-                <li class="enlace"><a href="nosotros.html">Nosotros</a></li>
-                <li class="enlace"><a href="productos.html">Productos</a></li>
-                <li class="enlace"><a href="contacto.html">Contacto</a></li>
-                <li class="enlace"><a href="getAll.html">Login</a></li>
+                <li class="enlace"><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li class="enlace"><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
+                <li class="enlace"><a href="{{ url_for('productos') }}">Productos</a></li>
+                <li class="enlace"><a href="{{ url_for('contacto') }}">Contacto</a></li>
+                <li class="enlace"><a href="{{ url_for('getAll') }}">Login</a></li>
             </ul>
         </nav>
-
     </header>
 
-    <!-- //////////////////////////////////////////////////////////// -->
     <main class="main">
-
         <section class="master">
             <h1 class="animate__animated animate__bounceInLeft">EnoTech Solutions</h1>
             <p class="animate__animated animate__bounceInRight"><i>"Control inteligente de procesos enológicos"</i></p>
         </section>
-<!-- //////////////////////////////////////////////////////////// -->
+
         <section class="content">
-
             <article>
-
                 <p>EnoTech Solutions es líder en tecnología para la vitivinicultura, ofreciendo soluciones innovadoras para optimizar procesos en bodegas. Nos centramos en la eficiencia y sostenibilidad, entendiendo los desafíos de la producción de vino.</p>
                 <p>Desde la gestión de la cosecha hasta el embotellado, mejoramos cada etapa para asegurar alta calidad y respeto al medio ambiente. Nuestras tecnologías avanzadas y prácticas sostenibles ayudan a las bodegas a ser más eficientes y reducir el desperdicio.</p>
                 <p>Ofrecemos soluciones personalizadas para la fermentación precisa, el ahorro de agua y el control inteligente de procesos. Con EnoTech Solutions, optimice su bodega hacia un futuro más eficiente y sostenible.</p>
 
-
                 <div class="contenido">
-
                     <div class="cont-articulo">
                         <div class="imagen">
-                            <img src="../src/img/tablet2.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/tablet2.jpg') }}" alt="">
                         </div>
                         <h3>Reducción de Costos:</h3>
-                        <p>Con las soluciones de EnoTech, las bodegas pueden identificar y eliminar los puntos de ineficiencia
-                            en sus procesos, lo que conduce a una reducción significativa de los costos operativos. Desde la
-                            gestión eficiente de la energía hasta la optimización de los recursos hídricos, nuestras soluciones
-                            están diseñadas para ayudar a las bodegas a ahorrar dinero mientras mantienen la calidad del
-                            producto.</p>
+                        <p>Con las soluciones de EnoTech, las bodegas pueden identificar y eliminar los puntos de ineficiencia en sus procesos, lo que conduce a una reducción significativa de los costos operativos. Desde la gestión eficiente de la energía hasta la optimización de los recursos hídricos, nuestras soluciones están diseñadas para ayudar a las bodegas a ahorrar dinero mientras mantienen la calidad del producto.</p>
                     </div>
 
                     <div class="cont-articulo">
                         <div class="imagen">
-                            <img src="../src/img/EFICIENCIA.jpg" alt="">
+                            <img src="{{ url_for('static', filename='img/EFICIENCIA.jpg') }}" alt="">
                         </div>
                         <h3>Mejora de la Eficiencia:</h3>
-                        <p>Nuestras soluciones están diseñadas para mejorar la eficiencia en todas las etapas del proceso de
-                            producción. Desde la gestión automatizada de la fermentación hasta la implementación de sistemas de
-                            control avanzados, EnoTech ayuda a las bodegas a maximizar la producción mientras minimizan el
-                            tiempo de inactividad y los errores humanos.</p>
+                        <p>Nuestras soluciones están diseñadas para mejorar la eficiencia en todas las etapas del proceso de producción. Desde la gestión automatizada de la fermentación hasta la implementación de sistemas de control avanzados, EnoTech ayuda a las bodegas a maximizar la producción mientras minimizan el tiempo de inactividad y los errores humanos.</p>
                     </div>
 
                     <div class="cont-articulo">
                         <div class="imagen">
-                            <img src="../src/img/imagen-ecologica.webp" alt="">
+                            <img src="{{ url_for('static', filename='img/imagen-ecologica.webp') }}" alt="">
                         </div>
                         <h3>Minimización del Impacto Ambiental:</h3>
-                        <p>EnoTech está comprometida con la sostenibilidad ambiental y ofrece soluciones que ayudan a las
-                            bodegas a reducir su huella ecológica. Desde la gestión inteligente de residuos hasta la
-                            implementación de prácticas de producción más sostenibles, nuestras soluciones ayudan a las bodegas
-                            a cumplir con los estándares ambientales más exigentes y a contribuir a un futuro más verde.</p>
+                        <p>EnoTech está comprometida con la sostenibilidad ambiental y ofrece soluciones que ayudan a las bodegas a reducir su huella ecológica. Desde la gestión inteligente de residuos hasta la implementación de prácticas de producción más sostenibles, nuestras soluciones ayudan a las bodegas a cumplir con los estándares ambientales más exigentes y a contribuir a un futuro más verde.</p>
                     </div>
                 </div>
-                
-                
-                
 
                 <h2><i>Únase a las bodegas que confían en EnoTech para optimizar sus procesos. Contáctenos para una consulta y descubra cómo alcanzar el éxito y la sostenibilidad. Estamos aquí para apoyarlo en cada paso. ¡Esperamos ayudarlo a lograr sus objetivos!</i> </h2>
             </article>
+
             <div class="video">
                 <h2>PROCESO DE VINIFICACION</h2>
                 <iframe src="https://www.youtube.com/embed/-OcdjMg_EOY?si=j_ERwDYteyqMI0zb" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </section>
-
-       
     </main>
 
     <footer> <!--El footer tambien se mantien en todas las paginas del sitio -->
         <p>&copy; 2024 EnoTech Solutions. Todos los derechos reservados.</p>
     </footer>
 
-
-
-    <script src="src\scripts\Script.js"></script> <!--Este es el enlace al script de javascript, se coloca al final del body-->
+    <script src="{{ url_for('static', filename='scripts/Script.js') }}"></script> <!--Este es el enlace al script de javascript, se coloca al final del body-->
 </body>
 
 </html>
