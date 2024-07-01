@@ -1,112 +1,114 @@
-from flask import render_template, redirect, request, url_for
-from flask import Flask
+from flask import Flask, render_template, redirect, request, url_for
 from flaskext.mysql import MySQL
-
+import os
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
+# Configuración de la base de datos MySQL
+app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = ''
+app.config['MYSQL_DATABASE_DB'] = 'api_enotech'
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
 mysql = MySQL()
-
-app.config['MYSQL_DATABASE_HOST']='localhost'
-app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']=''
-app.config['MYSQL_DATABASE_DB']='api_enotech'
-
 mysql.init_app(app)
 
-def callBD(query,value = 0):
+def callBD(query, value=0):
     conexion = mysql.connect()
     cursor = conexion.cursor()
     if value == 0:
         cursor.execute(query)
     else:
-        cursor.execute(query,value)
+        cursor.execute(query, value)
     conexion.commit()
     return cursor.fetchall()
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template('/index.html')
+    return render_template('index.html')
 
 @app.route('/nosotros')
 def nosotros():
-    return render_template('/nosotros.html')
+    return render_template('nosotros.html')
 
 @app.route('/contacto')
 def contacto():
-    return render_template('/contacto.html')
+    return render_template('contacto.html')
 
 @app.route('/productos')
 def productos():
-    return render_template('/productos.html')
-
+    return render_template('productos.html')
 
 @app.route('/getAll')
 def getAll():
-    sql ="select a.idWine,a.winery,a.wine,b.country,a.image from `Api_Enotech`.`wines` as a inner join `Api_Enotech`.`Locations` as b on a.id_Location = b.idLocation "     
+    sql = "SELECT a.idWine, a.winery, a.wine, b.country, a.image FROM wines AS a INNER JOIN Locations AS b ON a.id_Location = b.idLocation"
     datos = callBD(sql)
-
-    return render_template('/getAll.html',wines = datos)
-
-
+    return render_template('getAll.html', wines=datos)
 
 @app.route('/create')
 def create():
-    sql = "select `idLocation`,`country` from `Api_Enotech`.`Locations`"
+    sql = "SELECT idLocation, country FROM Locations"
     datos = callBD(sql)
+    return render_template('create.html', locations=datos)
 
-    return render_template('/create.html',locations = datos)
-
-
-
-# TODO: REALIZAR EL GUARDADO DE LAS IMAGENES
-@app.route('/addWine',methods=["POST"])
+@app.route('/addWine', methods=["POST"])
 def addWine():
-    _winery = request.form["winery"]
-    _wine = request.form["wine"]
-    _location = request.form["location"]
-    # _image = request.form["image"]
-    _image = request.files["txtFoto"]
-    datos = (_winery,_wine,_location,_image)
+    try:
+        _winery = request.form["winery"]
+        _wine = request.form["wine"]
+        _location = request.form["location"]
+        _image = request.files["txtFoto"]
 
-    sql = "insert into `Api_Enotech`.`wines` (`winery`,`wine`,`id_Location`,`image`) values (%s,%s,%s,%s)" 
-    callBD(sql,datos)
+        if _image:
+            filename = secure_filename(_image.filename)
+            _image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        else:
+            filename = "default.jpg"
 
-    return redirect(url_for('getAll'))
+        datos = (_winery, _wine, _location, filename)
+        sql = "INSERT INTO wines (winery, wine, id_Location, image) VALUES (%s, %s, %s, %s)"
+        callBD(sql, datos)
+        return redirect(url_for('getAll'))
+    except Exception as e:
+        print("Error al agregar el vino:", e)
+        return f"Error al agregar el vino: {e}", 400
 
 @app.route('/edit/<int:id>')
 def edit(id):
-
-    sql ="select a.idWine,a.winery,a.wine,b.country,a.image from `Api_Enotech`.`wines` as a inner join `Api_Enotech`.`Locations` as b on a.id_Location = b.idLocation where `idWine` = %s"     
-    query = "select `idLocation`,`country` from `Api_Enotech`.`Locations`"
-    
-    wine = callBD(sql,id)
+    sql = "SELECT a.idWine, a.winery, a.wine, b.country, a.image FROM wines AS a INNER JOIN Locations AS b ON a.id_Location = b.idLocation WHERE idWine = %s"
+    query = "SELECT idLocation, country FROM Locations"
+    wine = callBD(sql, id)
     locations = callBD(query)
+    return render_template('edit.html', datos=wine, locations=locations)
 
-    return render_template('/edit.html',datos = wine, locations = locations)
-
-@app.route('/update',methods=["POST"])
+@app.route('/update', methods=["POST"])
 def update():
     __id = request.form["id"]
     _winery = request.form["winery"]
     _wine = request.form["wine"]
     _location = request.form["location"]
-    _image = "null"
+    _image = request.files["txtFoto"]
 
-    update =[_winery,_wine,_location,_image,__id]
-    query = "update `Api_Enotech`.`wines` set `winery`=%s,`wine`=%s,`id_Location`=%s,`image`=%s where `idWine`=%s"
-    callBD(query,update)
+    if _image and _image.filename != '':
+        filename = secure_filename(_image.filename)
+        _image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    else:
+        filename = "default.jpg"
 
-    return redirect('/getAll')
+    update = [_winery, _wine, _location, filename, __id]
+    query = "UPDATE wines SET winery=%s, wine=%s, id_Location=%s, image=%s WHERE idWine=%s"
+    callBD(query, update)
+    return redirect(url_for('getAll'))
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    query = "delete from `Api_Enotech`.`wines` where `idWine` = %s"
-    callBD(query,id)
-    
-    return redirect('/getAll')
-
+    query = "DELETE FROM wines WHERE idWine = %s"
+    callBD(query, id)
+    return redirect(url_for('getAll'))
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8500)
+    app.run(debug=True, port=8500)
