@@ -91,7 +91,7 @@ def update():
     _winery = request.form["winery"]
     _wine = request.form["wine"]
     _location = request.form["location"]
-    _image = request.files["txtFoto"]
+    _image = request.files["image"]
 
     if _image and _image.filename != '':
         filename = secure_filename(_image.filename)
