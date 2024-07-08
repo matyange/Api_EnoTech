@@ -23,7 +23,7 @@
                 <li class="enlace"><a href="{{ url_for('nosotros') }}">Nosotros</a></li>
                 <li class="enlace"><a href="{{ url_for('productos') }}">Productos</a></li>
                 <li class="enlace"><a href="{{ url_for('contacto') }}">Contacto</a></li>
-                <li class="enlace"><a href="{{ url_for('getAll') }}">Login</a></li>
+                <li class="enlace"><a href="{{ url_for('getAll') }}">Lista de Vinos</a></li>
             </ul>
         </nav>
     </header>
@@ -69,34 +69,6 @@
 
             <div id="catalogo">
                 <h2>Bodegas y líneas de vinos que controlamos</h2>
-            </div>
-            <div>
-                <button><a href="{{ url_for('create') }}">Crear</a></button>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Vino</th>
-                            <th>Cosecha</th>
-                            <th>País de Cosecha</th>
-                            <th>Imagen</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for item in wines %}
-                        <tr>
-                            <td>{{ item[1] }}</td>
-                            <td>{{ item[2] }}</td>
-                            <td>{{ item[3] }}</td>
-                            <td><img src="{{ url_for('static', filename='img/' ~ item[4]) }}" alt="Imagen de {{ item[1] }}"></td>
-                            <td>
-                                <a href="{{ url_for('edit', id=item[0]) }}">Editar</a>
-                                <a href="{{ url_for('delete', id=item[0]) }}" onclick="return confirm('¿Estás seguro de eliminar esta fila?')">Borrar</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
             </div>
         </section>
     </main>
